@@ -28,16 +28,54 @@ fun main() {
 
     val json = response?.body()
 
-    println(json)
+    //println(json)
 
-    val gson = Gson()
-    val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
+    /*
+    try {
+        val gson = Gson()
+        val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
 
-    val meuJogo = Jogo(
-        titulo = meuInfoJogo.info.title,
-        capa = meuInfoJogo.info.thumb
-    )
+        val meuJogo = Jogo(
+            titulo = meuInfoJogo.info.title,
+            capa = meuInfoJogo.info.thumb
+        )
+        println(meuJogo)
+    } catch (e: Exception) {
+        println("Ocorreu um erro ao criar o jogo: ${e.message}")
+    }
+*/
 
-    println(meuJogo)
+    var meuJogo:Jogo? = null
 
+    val resultado = runCatching {
+        val gson = Gson()
+        val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
+
+        meuJogo = Jogo(
+            titulo = meuInfoJogo.info.title,
+            capa = meuInfoJogo.info.thumb
+        )
+    }
+
+    resultado.onFailure {
+        println("Jogo inexistente")
+    }
+
+    resultado.onSuccess {
+        println("Deseja inserir uma descrição especializada? S/N")
+        val opcao = leitura.nextLine()
+        if (opcao.equals("S", true)) {
+            println("Insira a descrição personalizada para o jogo")
+            val descricaoPersonalizada = leitura.nextLine()
+            meuJogo?.descricao = descricaoPersonalizada
+        } else {
+            meuJogo?.descricao = meuJogo.titulo
+        }
+
+        println(meuJogo)
+    }
+
+    resultado.onSuccess {
+        println("Busca realizada com sucesso!")
+    }
 }

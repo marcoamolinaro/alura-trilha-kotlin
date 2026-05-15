@@ -4,7 +4,7 @@ data class Jogo(
     val titulo: String,
     val capa: String) {
 
-    val descricao = ""
+    var descricao:String? = null
     override fun toString(): String {
         return "Meu Jogo:\n" +
                   "\tTitulo: $titulo\n" +
