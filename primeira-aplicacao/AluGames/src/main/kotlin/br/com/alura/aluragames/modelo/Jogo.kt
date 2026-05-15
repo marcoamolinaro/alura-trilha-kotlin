@@ -1,4 +1,4 @@
-package org.example
+package org.example.br.com.alura.aluragames.modelo
 
 data class Jogo(
     val titulo: String,
