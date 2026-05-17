@@ -25,7 +25,12 @@ data class Gamer(
         criarIdInterno()
     }
 
-
+    init {
+        if (nome.isNullOrBlank()) {
+            throw IllegalArgumentException("Nome inválido, não pode ser nulo ou vazio")
+        }
+        this.email = validarEmail()
+    }
 
     override fun toString(): String {
         return "Gamer(nome='$nome', email='$email', dataNascimento=$dataNascimento, " +
@@ -36,5 +41,15 @@ data class Gamer(
         val numero = Random.nextInt(1000, 10000)
         val tag = String.format("%04d", numero)
         idInterno = "$usuario#$tag"
+    }
+
+    fun validarEmail(): String {
+        val regex = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
+
+        if (regex.matches(email)) {
+            return email
+        } else {
+            throw IllegalArgumentException("Email invalido")
+        }
     }
 }

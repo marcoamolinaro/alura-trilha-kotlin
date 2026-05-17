@@ -3,7 +3,7 @@ package org.example.br.com.alura.aluragames.principal
 import org.example.br.com.alura.aluragames.modelo.Gamer
 
 fun main() {
-    val gamer1 = Gamer(nome = "Gamer 1", email = "gamer1@gamil.com")
+    val gamer1 = Gamer(nome = "Gamer 1", email = "gamer1@email.com")
     println(gamer1)
 
     val gamer2 = Gamer(
