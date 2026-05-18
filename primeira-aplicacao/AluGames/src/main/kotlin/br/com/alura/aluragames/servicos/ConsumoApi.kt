@@ -2,8 +2,10 @@ package org.example.br.com.alura.aluragames.servicos
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.example.br.com.alura.aluragames.modelo.Gamer
 import org.example.br.com.alura.aluragames.modelo.InfoGamerJson
 import org.example.br.com.alura.aluragames.modelo.InfoJogo
+import org.example.br.com.alura.aluragames.utils.criaGamer
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -31,7 +33,7 @@ class ConsumoApi {
         return meuInfoJogo
     }
 
-    fun buscaGamers() :List<InfoGamerJson> {
+    fun buscaGamers() :List<Gamer> {
         val url = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
 
         val client: HttpClient? = HttpClient.newHttpClient()
@@ -49,6 +51,10 @@ class ConsumoApi {
         val meuGamerTipo = object : TypeToken<List<InfoGamerJson>>() {}.type
         val listaGamer: List<InfoGamerJson> = gson.fromJson(json, meuGamerTipo)
 
-        return listaGamer
+        val listaGamerConvertida = listaGamer.map {
+            infoGamerJson -> infoGamerJson.criaGamer()
+        }
+
+        return listaGamerConvertida
     }
 }

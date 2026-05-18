@@ -3,7 +3,7 @@ package org.example.br.com.alura.aluragames.principal
 import org.example.br.com.alura.aluragames.modelo.Gamer
 import org.example.br.com.alura.aluragames.modelo.Jogo
 import org.example.br.com.alura.aluragames.servicos.ConsumoApi
-import transoformarEmIdade
+import org.example.br.com.alura.aluragames.utils.transoformarEmIdade
 import java.util.*
 
 

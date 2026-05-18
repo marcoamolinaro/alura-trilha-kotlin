@@ -1,3 +1,5 @@
+package org.example.br.com.alura.aluragames.utils
+
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
