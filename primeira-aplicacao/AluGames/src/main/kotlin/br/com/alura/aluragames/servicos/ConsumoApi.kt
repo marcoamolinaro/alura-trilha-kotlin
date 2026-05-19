@@ -5,7 +5,10 @@ import com.google.gson.reflect.TypeToken
 import org.example.br.com.alura.aluragames.modelo.Gamer
 import org.example.br.com.alura.aluragames.modelo.InfoGamerJson
 import org.example.br.com.alura.aluragames.modelo.InfoJogo
+import org.example.br.com.alura.aluragames.modelo.InfoJogoJson
+import org.example.br.com.alura.aluragames.modelo.Jogo
 import org.example.br.com.alura.aluragames.utils.criaGamer
+import org.example.br.com.alura.aluragames.utils.criaJogo
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -35,6 +38,19 @@ class ConsumoApi {
         val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
 
         return meuInfoJogo
+    }
+
+    fun buscaJogosJson(): List<Jogo> {
+        val endereco = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/jogos.json"
+        val json = consomeDados(endereco)
+
+        val gson = Gson()
+        val meuJogoTipo = object : TypeToken<List<InfoJogoJson>>() {}.type
+        val listaJogo: List<InfoJogoJson> = gson.fromJson(json, meuJogoTipo)
+
+        val listaJogoConvertida = listaJogo.map { infoJogoJson -> infoJogoJson.criaJogo() }
+
+        return listaJogoConvertida
     }
 
     fun buscaGamers() :List<Gamer> {
