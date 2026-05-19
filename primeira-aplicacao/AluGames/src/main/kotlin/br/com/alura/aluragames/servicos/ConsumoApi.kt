@@ -14,9 +14,7 @@ import java.net.http.HttpResponse.BodyHandlers
 
 class ConsumoApi {
 
-    fun buscaJogo(id: String) :InfoJogo {
-        val url = "https://www.cheapshark.com/api/1.0/games?id=$id"
-
+    private fun consomeDados(url: String): String? {
         val client: HttpClient? = HttpClient.newHttpClient()
         val request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -25,7 +23,13 @@ class ConsumoApi {
         val response: HttpResponse<String?>? = client!!
             .send(request, BodyHandlers.ofString())
 
-        val json = response?.body()
+        return response?.body()
+    }
+
+    fun buscaJogo(id: String) :InfoJogo {
+        val url = "https://www.cheapshark.com/api/1.0/games?id=$id"
+
+        val json = consomeDados(url)
 
         val gson = Gson()
         val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
@@ -36,15 +40,7 @@ class ConsumoApi {
     fun buscaGamers() :List<Gamer> {
         val url = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
 
-        val client: HttpClient? = HttpClient.newHttpClient()
-        val request = HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .build()
-
-        val response: HttpResponse<String?>? = client!!
-            .send(request, BodyHandlers.ofString())
-
-        val json = response?.body()
+        val json = consomeDados(url)
 
         val gson = Gson()
 
