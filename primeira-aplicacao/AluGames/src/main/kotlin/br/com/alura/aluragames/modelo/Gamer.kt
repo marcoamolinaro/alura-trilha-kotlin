@@ -1,5 +1,6 @@
 package org.example.br.com.alura.aluragames.modelo
 
+import java.time.LocalDate
 import kotlin.random.Random
 import java.util.*
 
@@ -30,7 +31,7 @@ data class Gamer(
     }
 
     init {
-        if (nome.isNullOrBlank()) {
+        if (nome.isBlank()) {
             throw IllegalArgumentException("Nome inválido, não pode ser nulo ou vazio")
         }
         this.email = validarEmail()
@@ -53,12 +54,12 @@ data class Gamer(
         if (regex.matches(email)) {
             return email
         } else {
-            throw IllegalArgumentException("Email invalido")
+            throw IllegalArgumentException("Email inválido")
         }
     }
 
-    fun alugaJogo(jogo: Jogo): Aluguel {
-        return Aluguel(this, jogo)
+    fun alugaJogo(jogo: Jogo, periodo: Periodo): Aluguel {
+        return Aluguel(this, jogo, periodo)
     }
 
     companion object {
