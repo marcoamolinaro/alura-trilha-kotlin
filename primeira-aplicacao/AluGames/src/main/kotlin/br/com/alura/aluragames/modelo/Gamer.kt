@@ -66,6 +66,12 @@ data class Gamer(
         return aluguel
     }
 
+    fun jogoDoMes(mes: Int): List<Jogo> {
+        return jogosAlugados
+            .filter { aluguel -> aluguel?.periodo?.dataInicial?.monthValue == mes }
+            .map {aluguel -> aluguel!!.jogo }
+    }
+
     companion object {
         fun criarGamer(leitura: Scanner): Gamer {
             println("Boas vindas ao AluGames! Vamos fazer seu cadastro. Digite seu nome:")

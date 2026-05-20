@@ -17,6 +17,7 @@ fun main() {
     val jogo1 = listaJogosJson[10]
     val jogo2 = listaJogosJson[13]
     val jogo3 = listaJogosJson[14]
+    val jogo4 = listaJogosJson[15]
 
     //println(gamer1)
     //println(jogo1)
@@ -24,10 +25,12 @@ fun main() {
     val periodo1 = Periodo(LocalDate.now(), LocalDate.now().plusDays(7))
     val periodo2 = Periodo(LocalDate.now(), LocalDate.now().plusDays(4))
     val periodo3 = Periodo(LocalDate.now(), LocalDate.now().plusDays(15))
+    val periodo4 = Periodo(LocalDate.of(2023,8,2), LocalDate.of(2023,8,15))
 
-    val aluguel1 = gamer1.alugaJogo(jogo1, periodo1)
-    val aluguel2 = gamer1.alugaJogo(jogo2, periodo2)
-    val aluguel3 = gamer1.alugaJogo(jogo3, periodo3)
+    gamer1.alugaJogo(jogo1, periodo1)
+    gamer1.alugaJogo(jogo2, periodo2)
+    gamer1.alugaJogo(jogo3, periodo3)
+    gamer1.alugaJogo(jogo4, periodo4)
 
     var totalAluguel: Double = 0.0
 
@@ -46,4 +49,6 @@ fun main() {
 
     println("-".repeat(64))
     println("Valor total de R$ ${"%.2f".format(totalAluguel)}")
+
+    println("\nJogos do mês 08: ${gamer1.jogoDoMes(8)}")
 }
