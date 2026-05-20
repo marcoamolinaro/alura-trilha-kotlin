@@ -35,19 +35,20 @@ fun main() {
     var totalAluguel: Double = 0.0
 
     println("\nO(A) gamer ${gamer1.nome} alugou o(s) jogo(s):")
-    println("%-35s %-12s %-15s".format("Nome do jogo", "Preço", "Periodo (dias)"))
-    println("-".repeat(64))
+    println("%-35s %-12s %-15s %-12s"
+        .format("Nome do jogo", "Preço", "Periodo (dias)", "Preço aluguel"))
+    println("-".repeat(80))
 
     gamer1.jogosAlugados.forEach {
         val titulo = it?.jogo?.titulo ?: "-"
         val preco = it?.jogo?.preco ?: 0.0
         val periodoDias = it?.periodo?.emDias ?: 0
-
-        println("%-35s R$ %-9.2f %-15d".format(titulo, preco, periodoDias))
-        totalAluguel += it?.valorDoAluguel ?: 0.0
+        var valorAluguel= (preco + periodoDias)
+        println("%-35s R$ %-9.2f %-15d R$ %-9.2f".format(titulo, preco, periodoDias, valorAluguel))
+        totalAluguel += valorAluguel
     }
 
-    println("-".repeat(64))
+    println("-".repeat(80))
     println("Valor total de R$ ${"%.2f".format(totalAluguel)}")
 
     println("\nJogos do mês 08: ${gamer1.jogoDoMes(8)}")

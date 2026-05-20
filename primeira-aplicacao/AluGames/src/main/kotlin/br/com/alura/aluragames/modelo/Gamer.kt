@@ -1,8 +1,7 @@
 package org.example.br.com.alura.aluragames.modelo
 
-import java.time.LocalDate
-import kotlin.random.Random
 import java.util.*
+import kotlin.random.Random
 
 
 data class Gamer(
@@ -20,6 +19,8 @@ data class Gamer(
 
     var idInterno: String? = null
         private set
+
+    var plano: PlanoAvulso = PlanoAvulso("BRONZE")
 
     val jogosBuscados = mutableListOf<Jogo?>()
 
