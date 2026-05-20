@@ -20,7 +20,7 @@ data class Gamer(
     var idInterno: String? = null
         private set
 
-    var plano: PlanoAvulso = PlanoAvulso("BRONZE")
+    var plano: Plano = PlanoAvulso("BRONZE")
 
     val jogosBuscados = mutableListOf<Jogo?>()
 
