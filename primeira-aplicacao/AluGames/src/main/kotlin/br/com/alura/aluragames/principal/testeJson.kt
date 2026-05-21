@@ -19,7 +19,7 @@ fun main() {
     val jogo1 = listaJogosJson[10]
     val jogo2 = listaJogosJson[13]
     val jogo3 = listaJogosJson[14]
-    val jogo4 = listaJogosJson[15]
+    val jogo4 = listaJogosJson[2]
 
     val periodo1 = Periodo(LocalDate.now(), LocalDate.now().plusDays(7))
     val periodo2 = Periodo(LocalDate.now(), LocalDate.now().plusDays(4))
@@ -40,11 +40,10 @@ fun main() {
     gamer2.alugaJogo(jogo1, periodo1)
     gamer2.alugaJogo(jogo2, periodo2)
     gamer2.alugaJogo(jogo3, periodo3)
-    gamer2.alugaJogo(jogo4, periodo4)
+    gamer2.alugaJogo(jogo4, periodo3)
 
     imprimirRecibo(gamer2)
 
-    println(gamer2.jogosAlugados)
 }
 
 private fun imprimirRecibo(gamer1: Gamer) {

@@ -69,7 +69,7 @@ data class Gamer(
 
     fun jogoDoMes(mes: Int): List<Jogo> {
         return jogosAlugados
-            .filter { aluguel -> aluguel?.periodo?.dataInicial?.monthValue == mes }
+            .filter { aluguel -> aluguel!!.periodo.dataInicial.monthValue == mes }
             .map {aluguel -> aluguel!!.jogo }
     }
 
