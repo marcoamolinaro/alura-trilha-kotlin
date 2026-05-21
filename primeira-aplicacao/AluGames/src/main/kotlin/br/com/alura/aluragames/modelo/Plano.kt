@@ -1,11 +1,10 @@
 package org.example.br.com.alura.aluragames.modelo
 
-open class Plano(
+sealed class Plano(
     val tipo: String
 ) {
 
     open fun obterValor(aluguel: Aluguel): Double {
         return aluguel.jogo.preco * aluguel.periodo.emDias
     }
-
 }

@@ -25,6 +25,7 @@ fun main() {
     val periodo2 = Periodo(LocalDate.now(), LocalDate.now().plusDays(4))
     val periodo3 = Periodo(LocalDate.now(), LocalDate.now().plusDays(15))
     val periodo4 = Periodo(LocalDate.of(2023,8,2), LocalDate.of(2023,8,15))
+    val periodo5 = Periodo(LocalDate.now(), LocalDate.now().plusDays(5))
 
     gamer1.alugaJogo(jogo1, periodo1)
     gamer1.alugaJogo(jogo2, periodo2)
@@ -36,11 +37,21 @@ fun main() {
     println("\nJogos do mês 08: ${gamer1.jogoDoMes(8)}")
 
     val gamer2 = listaGamers[5]
-    gamer2.plano = PlanoAssinatura("PRATA", 9.90, 3)
+    //gamer2.plano = PlanoAssinatura("PRATA", 9.90, 3)
     gamer2.alugaJogo(jogo1, periodo1)
     gamer2.alugaJogo(jogo2, periodo2)
     gamer2.alugaJogo(jogo3, periodo3)
-    gamer2.alugaJogo(jogo4, periodo3)
+    gamer2.alugaJogo(jogo4, periodo5)
+
+    imprimirRecibo(gamer2)
+
+    gamer2.recomendar(7)
+    gamer2.recomendar(10)
+    gamer2.recomendar(8)
+
+    println(gamer2)
+
+    gamer2.alugaJogo(jogo1, periodo1)
 
     imprimirRecibo(gamer2)
 
