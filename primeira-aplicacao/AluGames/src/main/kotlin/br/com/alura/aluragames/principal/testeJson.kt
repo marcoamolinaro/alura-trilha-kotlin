@@ -10,10 +10,6 @@ fun main() {
     val consumo = ConsumoApi()
     val listaGamers = consumo.buscaGamers()
     val listaJogosJson = consumo.buscaJogosJson()
-//    val jogoApi = consumo.buscaJogo("143")
-//
-//    println("Lista de Gamers:\n $listaGamers")
-//    println("\nJogo :\n $jogoApi")
 
     val gamer1 = listaGamers[3]
     val jogo1 = listaJogosJson[10]
@@ -48,6 +44,9 @@ fun main() {
     gamer2.recomendar(7)
     gamer2.recomendar(10)
     gamer2.recomendar(8)
+
+    jogo1.recomendar(10)
+    jogo1.recomendar(10)
 
     println(gamer2)
 

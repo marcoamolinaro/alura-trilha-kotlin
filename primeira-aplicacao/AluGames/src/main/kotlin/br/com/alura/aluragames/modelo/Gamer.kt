@@ -31,7 +31,11 @@ data class Gamer(
         get() = listDeNotas.average()
 
     override fun recomendar(nota: Int) {
-        listDeNotas.add(nota)
+        if (nota !in 1..10) {
+            println("Nota inválida. Insira uma nota entre 1 e 10")
+        } else {
+            listaNotas.add(nota)
+        }
     }
 
     constructor(nome: String, email: String, dataNascimento: String, usuario:String) :
