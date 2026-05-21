@@ -37,7 +37,7 @@ fun main() {
     println("\nJogos do mês 08: ${gamer1.jogoDoMes(8)}")
 
     val gamer2 = listaGamers[5]
-    //gamer2.plano = PlanoAssinatura("PRATA", 9.90, 3)
+    gamer2.plano = PlanoAssinatura("PRATA", 9.90, 3, 0.15)
     gamer2.alugaJogo(jogo1, periodo1)
     gamer2.alugaJogo(jogo2, periodo2)
     gamer2.alugaJogo(jogo3, periodo3)
