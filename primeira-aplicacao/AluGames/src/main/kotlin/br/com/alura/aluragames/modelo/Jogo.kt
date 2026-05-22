@@ -1,10 +1,13 @@
 package org.example.br.com.alura.aluragames.modelo
 
+import com.google.gson.annotations.Expose
+
 data class Jogo(
-    val titulo: String,
-    val capa: String): Recomendavel {
+    @Expose val titulo: String,
+    @Expose val capa: String): Recomendavel {
 
     var preco = 0.0
+    var id = 0
     var descricao: String? = null
     private val listaNotas = mutableListOf<Int>()
 
@@ -19,10 +22,11 @@ data class Jogo(
         }
     }
 
-    constructor(titulo: String, capa: String, preco: Double, descricao: String):
+    constructor(titulo: String, capa: String, preco: Double, descricao: String, id: Int = 0):
         this(titulo, capa) {
         this.preco = preco
         this.descricao = descricao
+        this.id = id
     }
 
     override fun toString(): String {
@@ -31,6 +35,7 @@ data class Jogo(
             "Capa: $capa \n" +
             "Descricao: $descricao\n" +
             "Preço: $preco\n" +
+            "Id: $id\n" +
             "Reputação: %.2f".format(media)
     }
 

@@ -1,9 +1,11 @@
 package org.example.br.com.alura.aluragames.principal
 
+import com.google.gson.GsonBuilder
 import org.example.br.com.alura.aluragames.modelo.Gamer
 import org.example.br.com.alura.aluragames.modelo.Periodo
 import org.example.br.com.alura.aluragames.modelo.PlanoAssinatura
 import org.example.br.com.alura.aluragames.servicos.ConsumoApi
+import java.io.File
 import java.time.LocalDate
 
 fun main() {
@@ -65,7 +67,13 @@ fun main() {
     println("\nRecomendações Gamer2")
     println(gamer2.jogosRecomendados)
 
+    val gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+    val serializacao = gson.toJson(gamer1.jogosRecomendados)
+    println(serializacao)
 
+    val arquivo = File("jogosRecomendados-${gamer1.nome}.json")
+    arquivo.writeText(serializacao)
+    println(arquivo.absolutePath)
 }
 
 private fun imprimirRecibo(gamer1: Gamer) {
