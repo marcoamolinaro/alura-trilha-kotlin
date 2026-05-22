@@ -25,17 +25,24 @@ data class Gamer(
 
     val jogosAlugados = mutableListOf<Aluguel?>()
 
-    private val listDeNotas = mutableListOf<Int>()
+    private val listaDeNotas = mutableListOf<Int>()
+
+    val jogosRecomendados = mutableListOf<Jogo>()
 
     override val media: Double
-        get() = listDeNotas.average()
+        get() = listaDeNotas.average()
 
     override fun recomendar(nota: Int) {
         if (nota !in 1..10) {
             println("Nota inválida. Insira uma nota entre 1 e 10")
         } else {
-            listaNotas.add(nota)
+            listaDeNotas.add(nota)
         }
+    }
+
+    fun recomendarJogo(jogo: Jogo, nota: Int) {
+        jogo.recomendar(nota)
+        jogosRecomendados.add(jogo)
     }
 
     constructor(nome: String, email: String, dataNascimento: String, usuario:String) :

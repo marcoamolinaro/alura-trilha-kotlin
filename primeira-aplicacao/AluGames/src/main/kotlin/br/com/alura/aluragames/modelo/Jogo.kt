@@ -30,7 +30,8 @@ data class Jogo(
             "Título: $titulo \n" +
             "Capa: $capa \n" +
             "Descricao: $descricao\n" +
-            "Preço: $preco\n"
+            "Preço: $preco\n" +
+            "Reputação: %.2f".format(media)
     }
 
 }

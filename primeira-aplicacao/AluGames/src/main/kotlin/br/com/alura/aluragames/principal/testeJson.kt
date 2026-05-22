@@ -54,6 +54,18 @@ fun main() {
 
     imprimirRecibo(gamer2)
 
+    gamer2.recomendarJogo(jogo1, 10)
+    gamer2.recomendarJogo(jogo2, 9)
+    gamer1.recomendarJogo(jogo1, 5)
+    gamer1.recomendarJogo(jogo2, 7)
+
+    println("Recomendações Gamer1")
+    println(gamer1.jogosRecomendados)
+
+    println("\nRecomendações Gamer2")
+    println(gamer2.jogosRecomendados)
+
+
 }
 
 private fun imprimirRecibo(gamer1: Gamer) {
