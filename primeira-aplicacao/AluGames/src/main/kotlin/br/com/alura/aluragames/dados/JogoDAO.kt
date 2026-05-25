@@ -1,46 +1,9 @@
 package org.example.br.com.alura.aluragames.dados
 
-import org.example.br.com.alura.aluragames.dados.Banco.obterConexao
 import org.example.br.com.alura.aluragames.modelo.Jogo
-import java.sql.SQLException
 
 class JogoDAO {
-    fun getJogos(): List<Jogo> {
-        val conexao = obterConexao()
-        val listJogos = mutableListOf<Jogo>()
-
-        if (conexao != null) {
-            try {
-                val statement = conexao.createStatement()
-
-                val resultSet = statement.executeQuery("SELECT * FROM jogos")
-
-                while (resultSet.next()) {
-                    val id = resultSet.getInt("id")
-                    val titulo = resultSet.getString("titulo")
-                    val capa = resultSet.getString("capa")
-                    val preco = resultSet.getDouble("preco")
-                    val descricao = resultSet.getString("descricao")
-
-                    val jogo = Jogo(titulo, capa, preco, descricao, id)
-                    listJogos.add(jogo)
-                }
-
-                statement.close()
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            } finally {
-                try {
-                    conexao.close()
-                } catch (e: SQLException) {
-                    e.printStackTrace()
-                }
-            }
-        }
-
-        return listJogos
-    }
-
+/*
     fun adicionarJogo(jogo: Jogo) {
         val conexao = obterConexao()
         val insert = "INSERT INTO jogos (titulo, capa, preco, descricao) VALUES (?, ?, ?, ?)"
@@ -64,6 +27,24 @@ class JogoDAO {
                     e.printStackTrace()
                 }
             }
+        }
+    }
+ */
+
+    fun getJogos(): List<Jogo> {
+        val manager = Banco.getEntityManager()
+        try {
+           val query = manager.createQuery("FROM JogoEntity", JogoEntity::class.java)
+            return query.resultList.map {
+                entity -> Jogo(
+                    entity.titulo,
+                    entity.capa,
+                    entity.preco,
+                    entity.descricao!!,
+                    entity.id)
+            }
+        } finally {
+            manager.close()
         }
     }
 }

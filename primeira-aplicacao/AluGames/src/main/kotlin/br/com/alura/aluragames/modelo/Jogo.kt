@@ -2,11 +2,13 @@ package org.example.br.com.alura.aluragames.modelo
 
 import com.google.gson.annotations.Expose
 
+
 data class Jogo(
     @Expose val titulo: String,
     @Expose val capa: String): Recomendavel {
 
     var preco = 0.0
+
     var id = 0
     var descricao: String? = null
     private val listaNotas = mutableListOf<Int>()
