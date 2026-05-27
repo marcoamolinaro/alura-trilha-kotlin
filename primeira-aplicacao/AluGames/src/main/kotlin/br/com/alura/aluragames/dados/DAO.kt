@@ -7,7 +7,7 @@ abstract class DAO <TModel, TEntity>(
     protected val manager: EntityManager,
     protected val entityType: Class<TEntity>) {
 
-    abstract fun toEntity(objeto: TModel): TEntity
+    abstract fun toEntity(plano: TModel): TEntity
 
     abstract fun toModel(entity: TEntity): TModel
 
@@ -18,8 +18,8 @@ abstract class DAO <TModel, TEntity>(
         }
     }
 
-    open fun adicionar(objeto: TModel) {
-        val entity = toEntity(objeto)
+    open fun adicionar(plano: TModel) {
+        val entity = toEntity(plano)
 
         manager.transaction.begin()
         manager.persist(entity)
