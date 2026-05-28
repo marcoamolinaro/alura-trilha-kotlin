@@ -1,4 +1,4 @@
-package org.example.br.com.alura.aluragames.principal
+package principal
 
 import com.google.gson.GsonBuilder
 import org.example.br.com.alura.aluragames.modelo.Gamer

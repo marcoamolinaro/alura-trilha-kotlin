@@ -1,4 +1,4 @@
-package org.example.br.com.alura.aluragames.principal
+package principal
 
 import org.example.br.com.alura.aluragames.dados.Banco
 import org.example.br.com.alura.aluragames.dados.JogoDAO
