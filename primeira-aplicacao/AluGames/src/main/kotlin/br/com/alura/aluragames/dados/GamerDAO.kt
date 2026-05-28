@@ -8,23 +8,11 @@ import kotlin.jvm.java
 
 class GamerDAO(manager: EntityManager): DAO<Gamer, GamerEntity>(manager, GamerEntity::class.java) {
 
-    override fun toEntity(plano: Gamer): GamerEntity {
-        return GamerEntity(
-            plano.id,
-            plano.nome,
-            plano.email,
-            plano.dataNascimento,
-            plano.usuario,
-            plano.plano.toEntity())
+    override fun toEntity(objeto: Gamer): GamerEntity {
+        return objeto.toEntity()
     }
 
     override fun toModel(entity: GamerEntity): Gamer {
-        return Gamer(
-            entity.nome,
-            entity.email,
-            entity.dataNascimento,
-            entity.usuario,
-            entity.id
-        ).apply{plano = entity.plano.toModel()}
+        return entity.toModel().apply { plano = entity.plano.toModel() }
     }
 }
