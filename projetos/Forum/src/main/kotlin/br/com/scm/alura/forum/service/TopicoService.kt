@@ -6,10 +6,12 @@ import br.com.scm.alura.forum.model.Usuario
 import org.springframework.stereotype.Service
 
 @Service
-class TopicoService {
+class TopicoService(
+    private var topicos: List<Topico>
+) {
 
-    fun listar() : List<Topico> {
-        val topico = Topico(
+    init {
+        val topico1 = Topico(
             1,
             titulo = "Duvida sobre Spring Boot",
             mensagem = "Alguem pode me ajudar com Spring Boot?",
@@ -25,6 +27,46 @@ class TopicoService {
             )
         )
 
-        return listOf(topico, topico, topico)
+        val topico2 = Topico(
+            2,
+            titulo = "Duvida sobre controller",
+            mensagem = "Alguem pode me ajudar com controller?",
+            curso = Curso(
+                1,
+                nome = "Duvida sobre Spring Boot",
+                categoria = "Programação",
+            ),
+            autor = Usuario(
+                2,
+                nome = "Carmen",
+                email = "carmen@email.com"
+            )
+        )
+
+        val topico3 = Topico(
+            3,
+            titulo = "Duvida sobre Kotlin",
+            mensagem = "Alguem pode me ajudar com construtores?",
+            curso = Curso(
+                2,
+                nome = "Duvida sobre Kotlin",
+                categoria = "Programação",
+            ),
+            autor = Usuario(
+                3,
+                nome = "Sofia",
+                email = "sofia@email.com"
+            )
+        )
+
+        topicos = listOf(topico1, topico2, topico3)
+    }
+
+    fun listar() : List<Topico> {
+        return topicos
+    }
+
+    fun buscarPorId(id: Long) : Topico? {
+        return topicos.find { it.id == id }
     }
 }
