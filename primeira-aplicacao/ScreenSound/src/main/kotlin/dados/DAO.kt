@@ -9,15 +9,16 @@ abstract class DAO<TModel, TEntity>(
     abstract fun toEntity(model: TModel): TEntity
     abstract fun toModel(entity: TEntity): TModel
 
-    private fun prepareQuery(id: Int): TEntity? {
+    private fun preparaQuery(id: Int): TEntity? {
         val query = manager.createQuery(
-            "SELECT e FROM ${entityType.simpleName} e WHERE e.id = :id", entityType
+            "FROM ${entityType.simpleName} WHERE id = :id",
+            entityType
         )
-        val entity = query.singleResult
-        return entity
+        query.setParameter("id", id)
+        return query.singleResult
     }
 
-    open fun getList(): List<TModel> {
+    open fun getLista(): List<TModel> {
         val query = manager.createQuery("SELECT e FROM ${entityType.simpleName} e", entityType)
         return query.resultList.map { toModel(it) }
     }
@@ -30,12 +31,12 @@ abstract class DAO<TModel, TEntity>(
     }
 
     open fun recuperarPorId(id: Int): TModel {
-        val entity = prepareQuery(id)
+        val entity = preparaQuery(id)
         return toModel(entity!!)
     }
 
     open fun apagar(id: Int) {
-        val entity = prepareQuery(id)
+        val entity = preparaQuery(id)
         manager.transaction.begin()
         manager.remove(entity)
         manager.transaction.commit()
