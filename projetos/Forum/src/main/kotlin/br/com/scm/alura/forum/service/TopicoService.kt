@@ -27,16 +27,17 @@ class TopicoService(
         return topicoViewMapper.map(topico!!)
     }
 
-    fun cadastrar(form: TopicoForm) {
+    fun cadastrar(form: TopicoForm): TopicoView {
         val topico = topicoFormMapper.map(form)
         topico.id = topicos.size.toLong() + 1
         topicos = topicos.plus(topico)
+        return topicoViewMapper.map(topico)
     }
 
-    fun atualizar(form: TopicoAtualizarForm) {
+    fun atualizar(form: TopicoAtualizarForm): TopicoView {
         val topico = topicos.find { it.id == form.id }
             ?: throw RuntimeException("Topico não encontrado")
-        topicos = topicos.minus(topico).plus(Topico(
+        val topicoAtualizado = Topico(
             id = form.id,
             titulo = form.titulo,
             mensagem = form.mensagem,
@@ -45,7 +46,9 @@ class TopicoService(
             status = topico.status,
             dataCriacao = topico.dataCriacao,
             respostas = topico.respostas
-        ))
+        )
+        topicos = topicos.minus(topico).plus(topicoAtualizado)
+        return topicoViewMapper.map(topicoAtualizado)
     }
 
     fun deletar(id: Long) {
