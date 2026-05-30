@@ -1,7 +1,7 @@
 package br.com.scm.alura.forum.controller
 
-import br.com.scm.alura.forum.dto.TopicoDTO
-import br.com.scm.alura.forum.model.Topico
+import br.com.scm.alura.forum.dto.TopicoForm
+import br.com.scm.alura.forum.dto.TopicoView
 import br.com.scm.alura.forum.service.TopicoService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -17,17 +17,17 @@ class TopicoController(
 ) {
 
     @GetMapping
-    fun listas() : List<Topico> {
+    fun listas() : List<TopicoView> {
         return topicoService.listar()
     }
 
     @GetMapping("/{id}")
-    fun buscarPorId(@PathVariable id: Long) : Topico? {
+    fun buscarPorId(@PathVariable id: Long) : TopicoView? {
         return topicoService.buscarPorId(id)
     }
 
     @PostMapping
-    fun cadastrar(@RequestBody dto: TopicoDTO) {
+    fun cadastrar(@RequestBody dto: TopicoForm) {
         topicoService.cadastrar(dto)
     }
 }
