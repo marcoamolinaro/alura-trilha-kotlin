@@ -47,4 +47,10 @@ class TopicoService(
             respostas = topico.respostas
         ))
     }
+
+    fun deletar(id: Long) {
+        val topico = topicos.find { it.id == id }
+            ?: throw RuntimeException("Topico não encontrado")
+        topicos = topicos.minus(topico)
+    }
 }
