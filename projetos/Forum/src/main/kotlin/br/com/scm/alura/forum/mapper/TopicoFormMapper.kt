@@ -13,7 +13,6 @@ class TopicoFormMapper(
 
     override fun map(t: TopicoForm): Topico {
         return Topico(
-            id = t.id,
             titulo = t.titulo,
             mensagem = t.mensagem,
             curso = cursoService.buscarPorId(t.idCurso),
