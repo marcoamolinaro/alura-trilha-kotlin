@@ -3,6 +3,7 @@ package br.com.scm.alura.forum.service
 import br.com.scm.alura.forum.dto.TopicoAtualizarForm
 import br.com.scm.alura.forum.dto.TopicoForm
 import br.com.scm.alura.forum.dto.TopicoView
+import br.com.scm.alura.forum.exception.NotFoundException
 import br.com.scm.alura.forum.mapper.TopicoFormMapper
 import br.com.scm.alura.forum.mapper.TopicoViewMapper
 import br.com.scm.alura.forum.model.Topico
@@ -14,6 +15,7 @@ class TopicoService(
     private var topicos: List<Topico> = ArrayList(),
     private val topicoViewMapper: TopicoViewMapper,
     private val topicoFormMapper: TopicoFormMapper,
+    private val notFoundMessage: String? = "Tópico não encontrado"
 ) {
 
     fun listar() : List<TopicoView> {
@@ -24,7 +26,8 @@ class TopicoService(
 
     fun buscarPorId(id: Long) : TopicoView? {
         val topico =  topicos.find { it.id == id }
-        return topicoViewMapper.map(topico!!)
+            ?: throw NotFoundException(notFoundMessage)
+        return topicoViewMapper.map(topico)
     }
 
     fun cadastrar(form: TopicoForm): TopicoView {
@@ -36,7 +39,7 @@ class TopicoService(
 
     fun atualizar(form: TopicoAtualizarForm): TopicoView {
         val topico = topicos.find { it.id == form.id }
-            ?: throw RuntimeException("Topico não encontrado")
+            ?: throw NotFoundException(notFoundMessage)
         val topicoAtualizado = Topico(
             id = form.id,
             titulo = form.titulo,
@@ -53,7 +56,7 @@ class TopicoService(
 
     fun deletar(id: Long) {
         val topico = topicos.find { it.id == id }
-            ?: throw RuntimeException("Topico não encontrado")
+            ?: throw NotFoundException(notFoundMessage)
         topicos = topicos.minus(topico)
     }
 }
