@@ -6,6 +6,8 @@ import br.com.scm.alura.forum.dto.TopicoView
 import br.com.scm.alura.forum.service.TopicoService
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -22,6 +24,7 @@ class TopicoController(
 ) {
 
     @GetMapping
+    @Cacheable("listaDeTopicos")
     fun listar(
         @RequestParam(required = false) nomeCurso: String?,
         @PageableDefault(size = 5, sort=["dataCriacao"], direction = Sort.Direction.DESC) paginacao: Pageable) : Page<TopicoView> {
@@ -35,6 +38,7 @@ class TopicoController(
 
     @PostMapping
     @Transactional
+    @CacheEvict(value = ["listaDeTopicos"], allEntries = true)
     fun cadastrar(
         @RequestBody @Valid form: TopicoForm,
         uriBuilder: UriComponentsBuilder): ResponseEntity<TopicoView> {
@@ -45,6 +49,7 @@ class TopicoController(
 
     @PutMapping
     @Transactional
+    @CacheEvict(value = ["listaDeTopicos"], allEntries = true)
     fun atualizar(@RequestBody @Valid form: TopicoAtualizarForm): ResponseEntity<TopicoView> {
         val topicoView = topicoService.atualizar(form)
         return ResponseEntity.ok(topicoView)
@@ -53,6 +58,7 @@ class TopicoController(
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
+    @CacheEvict(value = ["listaDeTopicos"], allEntries = true)
     fun deletar(@PathVariable id: Long) {
         topicoService.deletar(id)
     }
